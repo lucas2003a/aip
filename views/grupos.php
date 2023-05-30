@@ -1,3 +1,5 @@
+<?php
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -29,15 +31,17 @@
             <div class="card-body">
                 <table class="table table-sm table-striped" id="tabla-grupos">
                     <colgroup>           
-                        <col width = "30%">
+                        <col width = "20%">
                         <col width = "35%">
                         <col width = "35%">
+                        <col width = "10%">
                     </colgroup>
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Código</th>
                             <th>Descripción</th>
+                            <th>Operaciones</th>
                         </tr>
                     </thead>
                     <tbody>
