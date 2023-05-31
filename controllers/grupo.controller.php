@@ -36,6 +36,21 @@ if(isset($_POST['operacion'])){
         }
     }
 
+    if($_POST['operacion'] == 'listado'){
+
+        $data = $grupo->listarGrupos();
+
+        if($data){
+
+            echo"<option value='' selected>Seleccione</option>";
+            foreach($data as $registro){
+                echo"option value='{$registro['idgrupo']}'>{$registro['codigog']}</option>";
+            }
+        }else{
+            echo"<option value=''>No encontramos resultados</option>";
+        }
+    }
+
     if($_POST['operacion']=='registrar'){
         
         $datosForm = [
