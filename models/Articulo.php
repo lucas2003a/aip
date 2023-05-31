@@ -24,6 +24,7 @@ class Articulo extends Conexion{
         }
     }
 
+<<<<<<< HEAD
     public function listadoArticulos($idgrupo = 0){
         try{
             $consulta = $this->accesoBD->prepare("call spu_obtener_Articulo(?)");
@@ -37,6 +38,8 @@ class Articulo extends Conexion{
         }
     }
 
+=======
+>>>>>>> 02d246ce1e2d002abd7f5a5b4263080cb597d389
     public function registrarArticulos($datos = []){
         try{
             $consulta = $this->accesoBD->prepare("spu_insertar_articulos(?,?,?)");

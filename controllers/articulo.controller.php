@@ -29,12 +29,17 @@ if(isset($_POST['operacion'])){
                         </td>
                     </tr>
                 ";
+<<<<<<< HEAD
                 $numeroFila++;
+=======
+                $numeroFila;
+>>>>>>> 02d246ce1e2d002abd7f5a5b4263080cb597d389
 
             }
         }    
     }
 
+<<<<<<< HEAD
     //revisar el procedimieto almacenado, porque no funciona
     if($_POST['operacion'] == 'listado'){
 
@@ -51,6 +56,8 @@ if(isset($_POST['operacion'])){
         }
     }
 
+=======
+>>>>>>> 02d246ce1e2d002abd7f5a5b4263080cb597d389
     if($_POST['operacion'] == 'insertar'){
         
         $datosForm = [
