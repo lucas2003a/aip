@@ -74,14 +74,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="formuario-articulos" autocomplete="off">
+                <form id="formulario-articulos" autocomplete="off">
                     <!--<div class="mb-3">
                         <label for="idcodigog" class="form-label">Codigo del grupo</label>
                         <input type="text" class="form-control form-control-sm" id="idcodigog">
                     </div>-->
                     <div class="mb-3">
-                        <label for="codigoa" class="form-label">Codigo del artículo</label>
-                        <input type="text" class="form-control form-control-sm" id="codigoa">
+                        <label for="codigog" class="form-label">Codigo del artículo</label>
+                        <select name="codigog" id="codigog" class="form-select form-select-sm">
+                          <option value="">Seleccione</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="descripcion" class="form-label">Descripción</label>
@@ -123,7 +125,7 @@
 
         function obtenerGupos(){
           $.ajax({
-            url : '../controllers/articulo.controller.php',
+            url : '../controllers/grupo.controller.php',
             tye : 'POST',
             data : {operacion : 'listado'},
             dataType: 'text',
@@ -168,20 +170,8 @@
     });
     </script>
   </body>
-=======
-            if(confirm("¿seguro de salvar los datos?")){    
-                let datosNuevos = {
-                    url : '../controllers/articulo.controller.php',
-                    idarticulo  : idarticuloactualizar,
-                    codigoa     : $("#codigoa").val(),
-                    descripcion : $("#descripcion").val(),
-                }
-            }
-        }
-        mostrarArticulos()
-    });
+
   </script>
 </body>
 
->>>>>>> 02d246ce1e2d002abd7f5a5b4263080cb597d389
 </html>

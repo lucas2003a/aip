@@ -44,7 +44,7 @@ if(isset($_POST['operacion'])){
 
             echo"<option value='' selected>Seleccione</option>";
             foreach($data as $registro){
-                echo"option value='{$registro['idgrupo']}'>{$registro['codigog']}</option>";
+                echo"<option value='{$registro['idgrupo']}'>{$registro['codigog']}</option>";
             }
         }else{
             echo"<option value=''>No encontramos resultados</option>";
