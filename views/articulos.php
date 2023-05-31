@@ -33,7 +33,7 @@
                     <strong>Lista de Articulos</strong>
                 </div>
                 <div class="col-md-6 text-end">
-                    <button class="btn btn-success btn-sm" id="abrir-modal" data-bs-toggle="modal" data-bs-target="#modal-registro-articulos"><i class="bi bi-plus-circle-fill"></i> Agregar Articulos</button>
+                    <button class="btn btn-success btn-sm" id="abrir-modal" data-bs-toggle="modal" data-bs-target="#modal-registro-articulos"><i class="bi bi-plus-circle-fill"></i> Agregar Artículos</button>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <!--<th>Grupo</th>-->
+                        <th>Grupo</th>
                         <th>Artículo</th>
                         <th>Descripción</th>
                         <th>Operaciones</th>
@@ -67,21 +67,26 @@
   <!-- Modal Body -->
   <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
   <div class="modal fade" id="modal-registro-articulos" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitleId">Registrar Articulos</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="formuario-articulos" autocomplete="off">
-                    <!--<div class="mb-3">
-                        <label for="idcodigog" class="form-label">Codigo del grupo</label>
-                        <input type="text" class="form-control form-control-sm" id="idcodigog">
-                    </div>-->
+                <form id="formulario-articulos" autocomplete="off">
+                    <div class="mb-3">
+                        <label for="codigog" class="form-label">Codigo del grupo</label>
+                        <select name="codigog" id="codigog" class="form-select form-select-sm">
+                          <option value="">Seleccione</option>
+                        </select>
+                    </div>
                     <div class="mb-3">
                         <label for="codigoa" class="form-label">Codigo del artículo</label>
-                        <input type="text" class="form-control form-control-sm" id="codigoa">
+                        <input type="text" class="form-control form-control-sm " id="codigoa">
+                        <!--<select name="codigoa" id="codigoa" class="form-select form-select-sm">
+                          <option value="">Seleccione</option>
+                        </select>-->
                     </div>
                     <div class="mb-3">
                         <label for="descripcion" class="form-label">Descripción</label>
@@ -118,13 +123,13 @@
   <script>
     $(document).ready(function(){
 
-        let datosNUevos = true;
+        let datosNuevos = true;
         let idarticuloactualizar = -1;
 
-        function obtenerGupos(){
+        function obtenerGrupos(){
           $.ajax({
-            url : '../controllers/articulo.controller.php',
-            tye : 'POST',
+            url : '../controllers/grupo.controller.php',
+            type : 'POST',
             data : {operacion : 'listado'},
             dataType: 'text',
             success : function(result){
@@ -132,6 +137,18 @@
             }
           });
         }
+
+        /*function obtenerArticulos(){
+          $.ajax({
+            url : '../controllers/articulo.controller.php',
+            type : 'POST',
+            data : {operacion : 'listado'},
+            dataType : 'text',
+            success : function(result){
+              $("#codigoa").html(result);
+            }
+          });
+        }*/
         
         function mostrarArticulos(){
             $.ajax({
@@ -147,41 +164,97 @@
         
         function registrarArticulos(){
           if(confirm("¿seguro de salvar los datos?")){    
-            let datosNuevos = {
-              url : '../controllers/articulo.controller.php',
+            let datos = {
+              operacion   : 'registrar',
               idarticulo  : idarticuloactualizar,
+              idgrupo     : $("#codigog").val(),
               codigoa     : $("#codigoa").val(),
-              descripcion : $("#descripcion").val(),
+              descripcion : $("#descripcion").val()
+            };
+
+            if(!datosNuevos){
+              datos["operacion"] = "actualizar";
             }
+            $.ajax({
+              url : '../controllers/articulo.controller.php',
+              type : 'POST',
+              data : datos,
+              success : function(result){
+                if(result == ""){
+                  $("#formulario-articulos")[0].reset();
+
+                  mostrarArticulos();
+
+                  $("#modal-registro-articulos").modal('hide');
+                }
+              }
+            });
           }       
         }
 
+        /*$("#codigog").change(function(){
+          const idgrupoFiltro = $(this).val();
+          $.ajax({
+            url : '../controllers/articulo.controller.php',
+            type: 'POST',
+            data : { 
+              operacion : 'listado',
+              idgrupo : idgrupoFiltro
+            },
+            dataType : 'text',
+            success : function(result){
+              $("#codigoa").html(result);
+            }
+          });
+        });*/
+
+        $("#tabla-articulos tbody").on("click",".editar",function(){
+          const idarticuloEditar = $(this).data("idarticulo");
+          $.ajax({
+            url : '../controllers/articulo.controller.php',
+            type : 'POST',
+            data : {
+              operacion : 'obtenerarticulo',
+              idarticulo : idarticuloEditar
+            },
+            dataType : 'JSON',
+            success : function(result){
+              console.log(result);
+
+              datosNuevos = false;
+
+              idarticuloactualizar = result["idgrupo"];
+              $("#codigog").val(result["codigog"]);
+              $("#codigoa").val(result["codigoa"]);
+              $("#descripcion").val(result["descripcion"]);
+
+              $("#modalTitleId").html("Actualizar datos de artículos");
+
+              $("#modal-registro-articulos").modal("show");
+            }
+          });
+        });
+
+        
         function abrirModal(){
 
           datosNuevos = true;
           $("#modal-title").html("Registro de artículos");
           $("#formulario-articulos")[0].reset();
         }
-        $("#guardar-articulos").click(registrarArticulos);
+
+        $("#guardar-articulo").click(registrarArticulos);
         $("#abrir-modal").click(abrirModal);
-      mostrarArticulos()
+
+        $("#modal-registro-articulos").on("show.bs.modal", event =>{
+        $("#codigog").focus();
+
+        obtenerGrupos();
+        //obtenerArticulos();
+        });
+      
+      mostrarArticulos();
     });
     </script>
   </body>
-=======
-            if(confirm("¿seguro de salvar los datos?")){    
-                let datosNuevos = {
-                    url : '../controllers/articulo.controller.php',
-                    idarticulo  : idarticuloactualizar,
-                    codigoa     : $("#codigoa").val(),
-                    descripcion : $("#descripcion").val(),
-                }
-            }
-        }
-        mostrarArticulos()
-    });
-  </script>
-</body>
-
->>>>>>> 02d246ce1e2d002abd7f5a5b4263080cb597d389
 </html>
