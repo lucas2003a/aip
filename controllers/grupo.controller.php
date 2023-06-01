@@ -13,8 +13,8 @@ if(isset($_POST['operacion'])){
         if($data){
 
             $numeroFila=1;
-            /*$datosEstudiante='';
-            $botonNulo="<a href='#' class='btn btn-sm btn-warning' title='no hay documento'><i class='bi bi-eye-slash-fill'></i></a>";*/
+            $datosGrupo='';
+            /*$botonNulo="<a href='#' class='btn btn-sm btn-warning' title='no hay documento'><i class='bi bi-eye-slash-fill'></i></a>";*/
             
             foreach($data as $registro){
 
@@ -38,14 +38,16 @@ if(isset($_POST['operacion'])){
 
     if($_POST['operacion'] == 'listado'){
 
-        $data = $grupo->listarGrupos();
+        $data = $grupo->listadoGrupos();
 
         if($data){
 
             echo"<option value='' selected>Seleccione</option>";
+
             foreach($data as $registro){
                 echo"<option value='{$registro['idgrupo']}'>{$registro['codigog']}</option>";
             }
+
         }else{
             echo"<option value=''>No encontramos resultados</option>";
         }

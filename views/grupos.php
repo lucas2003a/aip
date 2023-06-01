@@ -151,7 +151,7 @@
 
             function abrirModal(){
                 datosNuevos = true;
-                $("#modal-title").html("registros de grupos");
+                $("#modalTitleId").html("registros de grupos");
                 $("#formulario-grupos")[0].reset();
             }
             
@@ -193,11 +193,11 @@
 
                         datosNuevos = false;
 
-                        idgrupoactualizar = result["idgrupo"];
+                        idgrupoactualizar = result['idgrupo'];
                         $("#codigog").val(result["codigog"]);
                         $("#descripcion").val(result["descripcion"]);
 
-                        $("#modal-title").html("Actualizar datos de grupos");
+                        $("#modalTitleId").html("Actualizar datos de grupos");
                         
                         $("#modal-registro-grupos").modal("show");
                     }

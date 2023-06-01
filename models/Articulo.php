@@ -13,7 +13,7 @@ class Articulo extends Conexion{
 
     public function listarArticulos(){
         try{
-            $consulta = $this->accesoBD->prepare("call spu_listar_articulos");
+            $consulta = $this->accesoBD->prepare("call spu_listar_articulos()");
             $consulta->execute();
 
             return $consulta->fetchall(PDO::FETCH_ASSOC);    
@@ -39,14 +39,55 @@ class Articulo extends Conexion{
 
     public function registrarArticulos($datos = []){
         try{
-            $consulta = $this->accesoBD->prepare("spu_insertar_articulos(?,?,?)");
+            $consulta = $this->accesoBD->prepare("call spu_insertar_articulos(?,?,?)");
             $consulta->execute(
                 array(
-                    $datos['idgrupo'],
-                    $datos['codigoa'],
-                    $datos['descripcion']
+                    $datos["idgrupo"],
+                    $datos["codigoa"],
+                    $datos["descripcion"]
                 )
             );
+        }
+
+        catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function actualizarArticulos($datos = []){
+        try{
+            $consulta = $this->accesoBD->prepare("call spu_modificar_articulos(?,?,?,?)");
+            $consulta->execute(
+                array(
+                    $datos["idarticulo"],
+                    $datos["idgrupo"],
+                    $datos["cadigoa"],
+                    $datos["descripcion"]
+                )
+            );
+        }
+
+        catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+    
+    public function eliminarArticulos($idarticulo = 0){
+        try{
+            $consulta = $this->accesoBD->prepare("call spu_eliminar_articulos(?)");
+            $consulta->execute(array($idarticulo));
+        }
+        catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function obtenerArticulos($idarticulo = 0){
+        try{
+            $consulta = $this->accesoBD->prepare("call spu_recuperar_articulos(?)");
+            $consulta->execute(array($idarticulo));
+
+            return $consulta->fetch(PDO::FETCH_ASSOC);
         }
 
         catch(Exception $e){

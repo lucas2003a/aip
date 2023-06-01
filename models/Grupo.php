@@ -16,7 +16,19 @@ class Grupo extends Conexion{
             $consulta = $this->accesoBD->prepare("call spu_listar_grupos()");
             $consulta->execute();
 
-            return $consulta->fetchall(PDO::FETCH_ASSOC);
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function listadoGrupos(){
+        try{
+            $consulta = $this->accesoBD->prepare("CALL spu_listado_grupos()");
+            $consulta->execute();
+
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
         }
         catch(Exception $e){
             die($e->getMessage());
@@ -29,8 +41,8 @@ class Grupo extends Conexion{
             $consulta = $this->accesoBD->prepare("call spu_insertar_grupos(?,?)");
             $consulta->execute(
                 array(
-                    $datos['codigog'],
-                    $datos['descripcion']
+                    $datos["codigog"],
+                    $datos["descripcion"]
                 )
             );
         }
@@ -46,9 +58,9 @@ class Grupo extends Conexion{
             $consulta = $this->accesoBD->prepare("call spu_modificar_grupos(?,?,?)");
             $consulta->execute(
                 array(
-                    $datos['idgrupo'],
-                    $datos['codigog'],
-                    $datos['descripcion']
+                    $datos["idgrupo"],
+                    $datos["codigog"],
+                    $datos["descripcion"]
                 )
             );
         }
