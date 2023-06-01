@@ -17,7 +17,7 @@ if(isset($_POST['operacion'])){
 
             foreach($data as $registro){
 
-                $datosArticulo = $registro['codigoa'].' '. $registro['descripcion'];
+                $datosArticulo = $registro['codigog'].' '. $registro['codigoa'];
 
                 echo "
                     <tr>
@@ -60,7 +60,7 @@ if(isset($_POST['operacion'])){
 
             "idgrupo"       => $_POST['idgrupo'],
             "codigoa"       => $_POST['codigoa'],
-            "descripcion"   => $_POST['descripcion'],
+            "descripcion"   => $_POST['descripcion']
         ];
 
         $articulo->registrarArticulos($datosForm);

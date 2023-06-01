@@ -246,6 +246,25 @@
           });
         });
 
+        $("#tabla-articulos tbody").on("click",".eliminar",function(){
+          const idarticuloEliminar = $(this).data("idarticulo");
+          if (confirm("¿Seguro de eliminar el registro?")){
+            $.ajax({
+            url : '../controllers/articulo.controller.php',
+            type : 'POST',
+            data : {
+              operacion : 'eliminar',
+              idarticulo : idarticuloEliminar
+            },
+            success: function(result){
+              if(result == ""){
+                mostrarArticulos();
+              }
+            }
+          });
+          }
+        });
+
         $("#modal-registro-articulos").on("show.bs.modal", event =>{
         $("#codigog").focus();
 

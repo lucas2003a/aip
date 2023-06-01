@@ -61,7 +61,7 @@ class Articulo extends Conexion{
                 array(
                     $datos["idarticulo"],
                     $datos["idgrupo"],
-                    $datos["cadigoa"],
+                    $datos["codigoa"],
                     $datos["descripcion"]
                 )
             );
