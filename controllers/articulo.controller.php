@@ -82,6 +82,7 @@ if(isset($_POST['operacion'])){
         $articulo->eliminarArticulos($_POST['idarticulo']);
     }
 
+
     if($_POST['operacion'] == 'obtenerarticulo'){
         $registro = $articulo->obtenerArticulos($_POST['idarticulo']);
         echo json_encode($registro);

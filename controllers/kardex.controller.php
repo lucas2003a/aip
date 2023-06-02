@@ -30,9 +30,30 @@ if(isset($_POST['operacion'])){
                         <td>{$registro['concepto']}</td>
                         <td>{$registro['detalle']}</td>
                         <td>{$registro['encargado']}</td>
+                        <td>
+                            <a href='#' data-idkardex='{$registro['idkardex']}' class='btn btn-sm btn-danger eliminar'><i class='bi bi-trash3'></i></a>
+                            <a href='#' data-idkardex='{$registro['idkardex']}' class='btn btn-sm btn-info editar'><i class='bi bi-pencil'></i></a>
+                        </td>
                     </tr>
                 ";
+                $numeroFila++;
             }
+        }
+        
+    }
+
+    if($_POST['operacion'] == 'obtenerdescrip'){
+
+        $data = $kardex->recuperarDescrip($_POST['idarticulo']);
+
+        if($data){
+            echo "<option value='' selected>Seleccione</option>";
+
+            foreach($data as $registro){
+                echo "<option value='{$registro['idarticulo']}'>{$registro['descripcion']}</option>";
+            }
+        }else{
+            echo "<option value=''>No encontramos registros</option>";
         }
     }
 }

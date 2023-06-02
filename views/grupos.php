@@ -1,7 +1,7 @@
 <?php
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <title>AIP</title>
     <!-- Required meta tags -->

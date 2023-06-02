@@ -2,7 +2,7 @@
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
     <head>
         <title>Title</title>
@@ -75,10 +75,10 @@
         <!-- Button trigger modal -->
         
         <!-- Modal -->
-        <div class="modal fade" id="modal-kardex" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal fade" id="modal-registro-kardex" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header bg-primary text-light">
                                 <h5 class="modal-title" id="modalTitleId">Registrar kardex</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -99,21 +99,23 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="articulo" class="form-label">Artículo</label>
-                                    <input type="text" class="form-control form-control-sm" id="articulo" readonly>
+                                    <select name="articulo" id="articulo" class="form-select form-select-sm">
+                                        <option value="">Seleccione</option>
+                                    </select>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-primary" id="guardar-kardex">Save</button>
                     </div>
                 </div>
             </div>
         </div>
         
         <footer>
-            <!-- place footer here -->
+        <!-- place footer here -->
         </footer>
         <!-- Bootstrap JavaScript Libraries -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -133,12 +135,118 @@
                 let datosNuevos = true;
                 let idkardexactualizar = -1;
 
+                function obtenerGrupo(){
+                    $.ajax({
+                        url : '../controllers/grupo.controller.php',
+                        type : 'POST',
+                        data : {operacion : 'listado'},
+                        success : function(result){
+                            $("#codigog").html(result);
+                        }
+                    });
+                }
+
+                /*function obtenerCodarti(){
+                    $.ajax({
+                        url : '../controllers/articulo.controller.php',
+                        type : 'POST',
+                        data : {operacion : 'listado'},
+                        success : function(result){
+                            $("#codigoa").html(result);
+                        }
+                    });
+                }*/
+
+                $("#codigog").change(function(){
+                    const idgrupoFiltro = $(this).val();
+
+                    $.ajax({
+                        url : '../controllers/articulo.controller.php',
+                        type : 'POST',
+                        data : {
+                            operacion : 'listado',
+                            idgrupo : idgrupoFiltro
+                        },
+                        dataType : 'text',
+                        success : function(result){
+                            $("#codigoa").html(result);
+                        }
+                    });
+                });
+
+                $("#codigoa").change(function(){
+                    const idarticuloFiltrar = $(this).val();
+
+                    $.ajax({
+                        url : '../controllers/kardex.controller.php',
+                        type : 'POST',
+                        data : {
+                            operacion : 'obtenerdescrip',
+                            idarticulo : idarticuloFiltrar
+                        },
+                        dataType : 'text',
+                        success : function(result){
+                            $("#articulo").html(result);
+                        }
+                    });
+                });
+                
+                function mostrarKardex(){
+                  $.ajax({
+                    url : '../controllers/kardex.controller.php',
+                    type : 'POST',
+                    data : {operacion : 'listar'},
+                    success : function(result){
+                        $("#tabla-kardex tbody").html(result);
+                    }
+                  }) ; 
+                }
+
+                function registrarKardex(){
+                    if(confirm("¿desea guardar el registo?")){
+                        let datos = {
+                            operacion : 'registrar',
+                            idarticulo : $("#codigoa").val(),
+                        };
+
+                        if(!datosNuevos){
+                            datos["operacion"] = "actualizar";
+                        }
+
+                        $.ajax({
+                            url : '../controllers.kardex.controller.php',
+                            type : 'POST',
+                            data : datos,
+                            success : function(result){
+                                if(result == ""){
+                                    $("#formulario-kardex")[0].reset();
+
+                                    mostarKardex();
+
+                                    /*"#modal-registro-kardex", es el id del modal que se establece en la linea 78 en el segundo atributo:
+                                    <div class="modal fade" id="modal-registro-kardex" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">*/     
+                                    $("#modal-registro-kardex").modal('hide');
+                                }
+                            }
+                        })
+                    }
+                }
                 function abrirModal(){
                     datosNuevos = true;
                     $("#modalTitleId").html("Registrar Kardex");
                     $("#formulario-kardex")[0].reset();
                 }
+                $("#guardar-kardex").click(registrarKardex);
                 $("#abrir-modal").click(abrirModal);
+
+                $("#modal-registro-kardex").on("show.bs.modal",event => {
+                    $("#codigog").focus();
+                    
+                    //obtenerCodarti();
+                    obtenerGrupo();
+                });
+
+            mostrarKardex();
             });
         </script>
     </body>

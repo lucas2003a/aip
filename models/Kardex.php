@@ -45,4 +45,16 @@ class Kardex extends Conexion{
             die($e->getMessage());
         }
     }
+        public function recuperarDescrip($idarticulo = 0){
+        try{
+            $consulta = $this->accesoBD->prepare("call spu_recuperar_descripciona(?)");
+            $consulta->execute(array($idarticulo));
+
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
 }
