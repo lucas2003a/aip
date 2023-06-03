@@ -87,7 +87,7 @@
             
             <!-- Modal -->
             <div class="modal fade modal" id="modal-registro-kardex" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                             <div class="modal-header bg-primary text-light">
                                     <h5 class="modal-title" id="modalTitleId">Registrar kardex</h5>
