@@ -85,13 +85,13 @@
                     <div class="modal-body">
                         <form id="formulario-kardex" autocomplete="off">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-sm-6 col-md-4">
                                     <label for="codigog" class="form-label">Código de grupo</label>
                                     <select name="codigog" id="codigog" class="form-select form-select-sm">
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-sm-6 col-md-4">
                                     <label for="codigoa" class="form-label">Código de artículo</label>
                                     <select name="codigoa" id="codigoa" class="form-select form-select-sm">
                                         <option value="">Seleccione</option>
@@ -103,15 +103,39 @@
                                         <option value="">Seleccione</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6 mt-1">
-                                    <label for="fechaHora">Fecha y hora</label>
-                                    <input type="datetime-local" name="fechaHora" id="fechaHora" class="form-control form-control-sm">
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <label for="ingreso" class="form-label">Ingreso</label>
+                                    <input type="number" name="ingreso" id="ingreso" class="form-control form-control-sm">
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for="ingreso" class="form-label">Ingreso</label>
-                                        <input type="number" name="ingreso" id="ingreso" class="form-control form-control-sm">
-                                    </div>
+                                <div class="col-md-4">
+                                    <label for="salida" class="form-label">Salida</label>
+                                    <input type="number" name="salida" id="salida" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="saldo" class="form-label">Saldo</label>
+                                    <input type="number" name="saldo" id="saldo" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <label for="concepto" class="form-label">Concepto</label>
+                                    <input type="text" name="concepto" id="concepto" class="form-control form-control-sm" maxlength="40">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="detalle" class="form-label">Detalle</label>
+                                    <input type="text" name="detalle" id="detalle" class="form-control form-control-sm" maxlength="40">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <label for="encargado" class="form-label">Encargado</label>
+                                    <input type="text" name="encargado" id="encargado" class="form-control form-control-sm" maxlength="40">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="fecha_hora" class="form-label">Fecha</label>
+                                    <input type="date" name="fecha_hora" id="fecha_hora" class="form-control form-control-sm">
                                 </div>
                             </div>
                         </form>
@@ -215,8 +239,16 @@
                 function registrarKardex(){
                     if(confirm("¿desea guardar el registo?")){
                         let datos = {
-                            operacion : 'registrar',
-                            idarticulo : $("#codigoa").val(),
+                            operacion   :   'registrar',
+                            idkardex    :   idkardexactualizar,
+                            idarticulo  :   $("#codigoa").val(),
+                            fecha_hora  :   $("#fecha_hora").val(),
+                            ingreso     :   $("#ingreso").val(),
+                            salida      :   $("#salida").val(),
+                            saldo       :   $("#saldo").val(),
+                            concepto    :   $("#concepto").val(),
+                            detalle     :   $("#detalle").val(),
+                            encargado   :   $("#encargado").val()          
                         };
 
                         if(!datosNuevos){
@@ -224,14 +256,14 @@
                         }
 
                         $.ajax({
-                            url : '../controllers.kardex.controller.php',
+                            url : '../controllers/kardex.controller.php',
                             type : 'POST',
                             data : datos,
                             success : function(result){
                                 if(result == ""){
                                     $("#formulario-kardex")[0].reset();
 
-                                    mostarKardex();
+                                    mostrarKardex();
 
                                     /*"#modal-registro-kardex", es el id del modal que se establece en la linea 78 en el segundo atributo:
                                     <div class="modal fade" id="modal-registro-kardex" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">*/     
@@ -248,6 +280,58 @@
                 }
                 $("#guardar-kardex").click(registrarKardex);
                 $("#abrir-modal").click(abrirModal);
+
+                $("#tabla-kardex tbody").on("click",".editar",function(){
+                    const idkardexeditar = $(this).data("idkardex");
+                    
+                    $.ajax({
+                        url     : '../controllers/kardex.controller.php',
+                        type    : 'POST',
+                        data    : {
+                            operacion   : 'obtenerkardex',
+                            idkardex    : idkardexeditar,
+                        },
+                        dataType    : 'JSON',
+                        success     : function(result){
+                            console.log(result);
+
+                            datosNuevos = false;
+
+                            idkardexactualizar = result['idkardex'];
+                            $("#codigoa").val(result["idarticulo"]);
+                            $("#fecha_hora").val(result["fecha_hora"]);
+                            $("#ingreso").val(result["ingreso"]);
+                            $("#salida").val(result["salida"]);
+                            $("#saldo").val(result["saldo"]);
+                            $("#concepto").val(result["concepto"]);
+                            $("#detalle").val(result["detalle"]);
+                            $("#encargado").val(result["encargado"]);
+
+                            $("#modalTitleId").html("Actualizar kardex");
+
+                            $("#modal-registro-kardex").modal("show");
+                        }
+                    });
+                });
+
+                $("#tabla-kardex tbody").on("click",".eliminar",function(){
+                    const idkardexeliminar = $(this).data("idkardex");
+                    if(confirm("¿Desea eliminar el registro?")){
+                        $.ajax({
+                            url     :   '../controllers/kardex.controller.php',
+                            type    :   'POST',
+                            data    :{
+                                operacion   :   'eliminar',
+                                idkardex    :   idkardexeliminar
+                            }, 
+                            success :   function(result){
+                                if(result == ""){
+                                    mostrarKardex();
+                                }
+                            } 
+                        });
+                    }
+                });
 
                 $("#modal-registro-kardex").on("show.bs.modal",event => {
                     $("#codigog").focus();

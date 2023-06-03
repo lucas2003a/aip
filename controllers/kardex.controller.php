@@ -56,4 +56,47 @@ if(isset($_POST['operacion'])){
             echo "<option value=''>No encontramos registros</option>";
         }
     }
+
+    if($_POST['operacion']=='registrar'){
+
+        $datosForm = [
+            "idarticulo"    =>  $_POST['idarticulo'],
+            "fecha_hora"    =>  $_POST['fecha_hora'],
+            "ingreso"       =>  $_POST['ingreso'],
+            "salida"        =>  $_POST['salida'],
+            "saldo"         =>  $_POST['saldo'],
+            "concepto"      =>  $_POST['concepto'],
+            "detalle"       =>  $_POST['detalle'],
+            "encargado"     =>  $_POST['encargado']
+        ];
+
+        $kardex->registrarKardex($datosForm);
+    }
+
+    if ($_POST['operacion'] == 'actualizar'){
+
+        $datosForm = [        
+            "idkardex"      =>  $_POST['idkardex'],
+            "idarticulo"    =>  $_POST['idarticulo'],
+            "fecha_hora"    =>  $_POST['fecha_hora'],
+            "ingreso"       =>  $_POST['ingreso'],
+            "salida"        =>  $_POST['salida'],
+            "saldo"         =>  $_POST['saldo'],
+            "concepto"      =>  $_POST['concepto'],
+            "detalle"       =>  $_POST['detalle'],
+            "encargado"     =>  $_POST['encargado']
+        ];
+
+        $kardex->actualizarKardex($datosForm);
+
+    }
+
+    if($_POST['operacion'] == 'obtenerkardex'){
+        $registro = $kardex->obtenerKardex($_POST['idkardex']);
+        echo json_encode($registro);
+    }
+
+    if($_POST['operacion'] == 'eliminar'){
+        $registro = $kardex->eliminarKardex($_POST['idkardex']);
+    }
 }
