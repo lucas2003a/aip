@@ -1,3 +1,14 @@
+
+<style>
+  .gradient-custom {
+    background:#6a11cb ;
+    
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+  }
+</style>
+
 <?php
 ?>
 <!doctype html>
@@ -16,70 +27,71 @@
 
   </head>
   <body>
-    <div class="container mt-3">
-        <div class="card">
-            <div class="card-header bg-primary text-light">
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Lista de grupos</strong>
-                    </div>
-                    <div class="col-md-6 text-end">
-                        <button class="btn btn-success btn-sm" id="abrir-modal" data-bs-toggle="modal" data-bs-target="#modal-registro-grupos"><i class="bi bi-plus-circle-fill"></i> Agregar grupos</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <table class="table table-sm table-striped" id="tabla-grupos">
-                    <colgroup>           
-                        <col width = "20%">
-                        <col width = "35%">
-                        <col width = "35%">
-                        <col width = "10%">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Código</th>
-                            <th>Descripción</th>
-                            <th>Operaciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <!-- Button trigger modal -->
-    
-    <!-- Modal -->
-    <div class="modal fade" id="modal-registro-grupos" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitleId">Registro de grupos</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="formulario-grupos" autocomplete="off">
-                        <div class="mb-3">
-                            <label for="codigog" class="form-label">Código</label>
-                            <input type="text" class="form-control form-control-sm" id="codigog">
+    <section class="vh gradient-custom">
+        <div class="container pt-3 h-100">
+            <div class="card">
+                <div class="card-header bg-primary text-light">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1><strong>Lista de grupos</strong></h1>
                         </div>
-                        <div class="mb-3">
-                            <label for="descripcion" class="form-label">Descripción</label>
-                            <input type="text" class="form-control form-control-sm" id="descripcion">
+                        <div class="col-md-6 text-end">
+                            <button class="btn btn-success btn-sm" id="abrir-modal" data-bs-toggle="modal" data-bs-target="#modal-registro-grupos"><i class="bi bi-plus-circle-fill"></i> Agregar grupos</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="guardar-grupos">Guardar</button>
+                <div class="card-body">
+                    <table class="table table-sm table-striped" id="tabla-grupos">
+                        <colgroup>           
+                            <col width = "20%">
+                            <col width = "35%">
+                            <col width = "35%">
+                            <col width = "10%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Código</th>
+                                <th>Descripción</th>
+                                <th>Operaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- Button trigger modal -->
         
+        <!-- Modal -->
+        <div class="modal fade" id="modal-registro-grupos" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                            <h5 class="modal-title" id="modalTitleId">Registro de grupos</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formulario-grupos" autocomplete="off">
+                            <div class="mb-3">
+                                <label for="codigog" class="form-label">Código</label>
+                                <input type="text" class="form-control form-control-sm" id="codigog">
+                            </div>
+                            <div class="mb-3">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <input type="text" class="form-control form-control-sm" id="descripcion">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="guardar-grupos">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Optional: Place to the bottom of scripts -->
     
     

@@ -1,3 +1,17 @@
+<style>
+  .gradient-custom {
+    background:#6a11cb ;
+    
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+  }
+
+
+</style>
+
+<?php
+?>
 
 <!doctype html>
 <html lang="es">
@@ -15,36 +29,39 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="row mt-3">
-      <div class="col-md-3"></div>
-      <div class="col-md-6 ">
-        <!--INICIO DE CARD-->
-        <div class="card">
-          <div class="card-header bg-primary text-light text-center">
-            <strong>inicio de Sesión</strong>
-          </div>
-          <div class="card-body">
-            <form action="">
-              <div class="mb-3">
-                <label for="usuario" class="form-label">Usuario:</label>
-                <input type="text" id="usuario" class="form-control form-control-sm" autofocus>
+  <section class="vh gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-6 ">
+          <!--INICIO DE CARD-->
+          <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+              <div class="mb-md-5 mt-md-4 pb-5">
+                <h2 class="fw-bold mb-2 text-uppercase">inicio de Sesión</h2>
+                <p class="text-white-50 mb-5">Porfavor registrate</p>
+                <form action="">
+                  <div class="mb-4">
+                    <label for="usuario" class="form-label">Usuario:</label>
+                    <input type="text" id="usuario" class="form-control form-control- form-control-sm" autofocus>
+                  </div>
+                  <div class="mb-4">
+                    <label for="clave" class="form-label">Contraseña:</label>
+                    <input type="password" id="clave" class="form-control form-control-sm">
+                  </div>
+                  <button type="button" id="iniciar-sesion"class="btn btn-lg btn-outline-light px-5" >Iniciar sesion</button>
+                  <div>
+                    <p class="mb-0">¿No tienes una cuenta?<a href="#" class="text-white-50 fw-bold"> Registrate</a></p>
+                  </div>
+                </form>
               </div>
-              <div class="mb-3">
-                <label for="clave" class="form-label">Contraseña:</label>
-                <input type="password" id="clave" class="form-control form-control-sm">
-              </div>
-            </form>
+            </div>
+
           </div>
-          <div class="card-footer text-muted">
-            <button type="button" id="iniciar-sesion"class="btn btn-sm btn-success" >Iniciar sesion</button>
-          </div>
+          <!-- FIN DE CARD-->
         </div>
-        <!-- FIN DE CARD-->
       </div>
-      <div class="col-md-3"></div> 
     </div>
-  </diiv>
+  </section>
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">

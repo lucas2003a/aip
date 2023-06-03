@@ -1,3 +1,13 @@
+<style>
+  .gradient-custom {
+    background:#6a11cb ;
+    
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+  }
+</style>
+
 <?php
 ?>
 
@@ -25,84 +35,85 @@
   <main>
 
   </main>
-  <div class="container mt-3">
-    <div class="card">
-        <div class="card-header bg-primary text-light">
-            <div class="row">
-                <div class="col-md-6">
-                    <strong>Lista de Articulos</strong>
-                </div>
-                <div class="col-md-6 text-end">
-                    <button class="btn btn-success btn-sm" id="abrir-modal" data-bs-toggle="modal" data-bs-target="#modal-registro-articulos"><i class="bi bi-plus-circle-fill"></i> Agregar Artículos</button>
-                </div>
-            </div>
-        </div>
-        <div class="card-body">
-            <table class="table table-sm table-striped " id="tabla-articulos">
-                <colgroup>
-                    <col width="10%">
-                    <col width="20%">
-                    <col width="30%">
-                    <col width="30%">
-                    <col width="10%">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Grupo</th>
-                        <th>Artículo</th>
-                        <th>Descripción</th>
-                        <th>Operaciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
+  <section class="vh gradient-custom">
+    <div class="container pt-3 h-100">
+      <div class="card">
+          <div class="card-header bg-primary text-light">
+              <div class="row">
+                  <div class="col-md-6">
+                      <h1><strong>Lista de Articulos</strong></h1>
+                  </div>
+                  <div class="col-md-6 text-end">
+                      <button class="btn btn-success btn-sm" id="abrir-modal" data-bs-toggle="modal" data-bs-target="#modal-registro-articulos"><i class="bi bi-plus-circle-fill"></i> Agregar Artículos</button>
+                  </div>
+              </div>
+          </div>
+          <div class="card-body">
+              <table class="table table-sm table-striped " id="tabla-articulos">
+                  <colgroup>
+                      <col width="10%">
+                      <col width="20%">
+                      <col width="30%">
+                      <col width="30%">
+                      <col width="10%">
+                  </colgroup>
+                  <thead>
+                      <tr>
+                          <th>#</th>
+                          <th>Grupo</th>
+                          <th>Artículo</th>
+                          <th>Descripción</th>
+                          <th>Operaciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
+          </div>
+      </div>
     </div>
-  </div>
 
-  <!-- Modal trigger button -->
-  
-  <!-- Modal Body -->
-  <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-  <div class="modal fade" id="modal-registro-articulos" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitleId">Registrar Articulos</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formulario-articulos" autocomplete="off">
-                    <div class="mb-3">
-                        <label for="codigog" class="form-label">Codigo del grupo</label>
-                        <select name="codigog" id="codigog" class="form-select form-select-sm">
-                          <option value="">Seleccione</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="codigoa" class="form-label">Codigo del artículo</label>
-                        <input type="text" class="form-control form-control-sm " id="codigoa">
-                        <!--<select name="codigoa" id="codigoa" class="form-select form-select-sm">
-                          <option value="">Seleccione</option>
-                        </select>-->
+    <!-- Modal trigger button -->
+    
+    <!-- Modal Body -->
+    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+    <div class="modal fade" id="modal-registro-articulos" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitleId">Registrar Articulos</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form id="formulario-articulos" autocomplete="off">
+                      <div class="mb-3">
+                          <label for="codigog" class="form-label">Codigo del grupo</label>
+                          <select name="codigog" id="codigog" class="form-select form-select-sm">
+                            <option value="">Seleccione</option>
+                          </select>
+                      </div>
+                      <div class="mb-3">
+                          <label for="codigoa" class="form-label">Codigo del artículo</label>
+                          <input type="text" class="form-control form-control-sm " id="codigoa">
+                          <!--<select name="codigoa" id="codigoa" class="form-select form-select-sm">
+                            <option value="">Seleccione</option>
+                          </select>-->
 
-                    </div>
-                    <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <input type="text" class="form-control form-control-sm" id="descripcion">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="guardar-articulo">Guardar</button>
-            </div>
-        </div>
+                      </div>
+                      <div class="mb-3">
+                          <label for="descripcion" class="form-label">Descripción</label>
+                          <input type="text" class="form-control form-control-sm" id="descripcion">
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-primary" id="guardar-articulo">Guardar</button>
+              </div>
+          </div>
+      </div>
     </div>
-  </div>
-  
+  </section>
   
   <!-- Optional: Place to the bottom of scripts -->
 
