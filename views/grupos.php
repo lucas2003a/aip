@@ -28,7 +28,13 @@
   </head>
   <body>
     <section class="vh gradient-custom">
-        <div class="container pt-3 h-100">
+
+        <div class="container pt-3 h-100">        
+            <nav class="nav nav-tabs flex-column">
+            <a class="nav-link text-light" href="./articulos.php">Articulos</a>
+            <a class="nav-link text-light" href="./grupos.php">Grupos</a>
+            <a class="nav-link text-light" href="./kardex.php">Kardex</a>
+        </nav>
             <div class="card">
                 <div class="card-header bg-primary text-light">
                     <div class="row">
