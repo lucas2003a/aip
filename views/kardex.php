@@ -44,6 +44,7 @@
                                 <h1><strong>Kardex</strong></h1>
                             </div>
                             <div class="col-md-6 text-end">
+                                <a href="#" style="text-decoration: none;" class="btn btn-danger btn-sm"><i class="bi bi-box-arrow-left">Cerrar sesión</i></a>
                                 <button class="btn btn-success btn-sm" id="abrir-modal" data-bs-toggle="modal" data-bs-target="#modal-registro-kardex"><i class="bi bi-plus-circle-fill"></i> Agregar otro registro</button>
                             </div>
                         </div>
