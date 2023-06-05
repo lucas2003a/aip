@@ -10,10 +10,10 @@ class Usuario extends Conexion{
         $this->accesoBD = parent::getConexion();
     }
 
-    public function iniciarSesion($usuario = ""){
+    public function iniciarSesion($nusuario = ""){
         try{
             $consulta = $this->accesoBD->prepare("call spu_usuarios_login(?)");
-            $consulta->execute(array($usuario));
+            $consulta->execute(array($nusuario));
 
             return $consulta->fetch(PDO::FETCH_ASSOC);
         }
@@ -29,8 +29,8 @@ class Usuario extends Conexion{
                 array(
                     $datos["nombres"],
                     $datos["apellidos"],
-                    $datos["usuario"],
-                    $datos["clavecceso"]
+                    $datos["nusuario"],
+                    $datos["claveacceso"]
                 )
             );
         }

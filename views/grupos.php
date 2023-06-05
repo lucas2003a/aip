@@ -10,6 +10,11 @@
 </style>
 
 <?php
+
+session_start();
+if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
+    header('Location:../index.php');
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -31,9 +36,9 @@
 
         <div class="container pt-3 h-100">        
             <nav class="nav nav-tabs flex-column">
-            <a class="nav-link text-light" href="./articulos.php">Articulos</a>
-            <a class="nav-link text-light" href="./grupos.php">Grupos</a>
-            <a class="nav-link text-light" href="./kardex.php">Kardex</a>
+            <a class="nav-link text-light" href="articulos.php">Articulos</a>
+                <a class="nav-link text-light" href="grupos.php">Grupos</a>
+                <a class="nav-link text-light" href="kardex.php">Kardex</a>
         </nav>
             <div class="card">
                 <div class="card-header bg-primary text-light">
@@ -42,7 +47,7 @@
                             <h1><strong>Lista de grupos</strong></h1>
                         </div>
                         <div class="col-md-6 text-end">
-                            <a href="#" style="text-decoration: none;" class="btn btn-danger btn-sm"><i class="bi bi-box-arrow-left">Cerrar sesión</i></a>
+                            <a href="../controllers/usuario.controller.php?operacion=finalizar" style="text-decoration: none;" class="btn btn-danger btn-sm"><i class="bi bi-box-arrow-left">Cerrar sesión</i></a>
                             <button class="btn btn-success btn-sm" id="abrir-modal" data-bs-toggle="modal" data-bs-target="#modal-registro-grupos"><i class="bi bi-plus-circle-fill"></i> Agregar grupo</button>
                         </div>
                     </div>

@@ -12,10 +12,6 @@
 
 <?php
 
-session_start();
-if(isset($_SESSION['login']) && $_SESSION['login']){
-  header('Location:views/kardex.php');
-}
 ?>
 
 <!doctype html>
@@ -42,21 +38,26 @@ if(isset($_SESSION['login']) && $_SESSION['login']){
           <div class="card bg-primary text-white">
             <div class="card-body text-center">
               <div class="mb-md-5 mt-md-4 pb-5">
-                <h2 class="fw-bold mb-2 text-uppercase">inicio de Sesión</h2>
+                <h2 class="fw-bold mb-2 text-uppercase">registro de usuarios</h2>
                 <p class="text-white-50 mb-5">Porfavor registrate</p>
-                <form action="" autocomplete="off">
+                <form id="formulario-login" autocomplete="off">
+                  <div class="mb-4">
+                    <label for="nombres" class="form-label">Nombres:</label>
+                    <input type="text" id="nombres" class="form-control form-control-sm" autofocus>
+                  </div>
+                  <div class="mb-4">
+                    <label for="apellidos" class="form-label">Apellidos:</label>
+                    <input type="text" id="apellidos" class="form-control form-control-sm">
+                  </div>
                   <div class="mb-4">
                     <label for="nusuario" class="form-label">Usuario:</label>
-                    <input type="text" id="nusuario" class="form-control form-control-sm"autofocus>
+                    <input type="text" id="nusuario" class="form-control form-control-sm">
                   </div>
                   <div class="mb-4">
-                    <label for="clave" class="form-label">Contraseña:</label>
-                    <input type="password" id="clave" class="form-control form-control-sm">
+                    <label for="claveacceso" class="form-label">Contraseña:</label>
+                    <input type="password" id="claveacceso" class="form-control form-control-sm">
                   </div>
                   <button type="button" id="iniciar-sesion"class="btn btn-lg btn-outline-light px-5" >Iniciar sesion</button>
-                  <div>
-                    <p class="mb-0">¿No tienes una cuenta?<a href="views/login.php" class="text-white-50 fw-bold"> Registrate</a></p>
-                  </div>
                 </form>
               </div>
             </div>
@@ -83,13 +84,63 @@ if(isset($_SESSION['login']) && $_SESSION['login']){
   <script>
     $(document).ready(function(){
 
+      function registrarLogin(){
+
+
+        Swal.fire({
+          icon: 'question',
+          title: 'Matrículas',
+          text: '¿Está seguro de guardar el registro?',
+          footer: 'Desarrollado con PHP',
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#3498DB',
+          showCancelButton: true,
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          //Identificando acción del usuario
+          if (result.isConfirmed){
+                    //Enviaremos los datos dentro de un OBJETO
+          var formData = new FormData();
+
+            formData.append("operacion", "registrar");
+            formData.append("nombres", $("#nombres").val());
+            formData.append("apellidos", $("#apellidos").val());
+            formData.append("nusuario", $("#nusuario").val());
+            formData.append("claveacceso", $("#claveacceso").val());
+
+            $.ajax({
+              url: '../controllers/usuario.controller.php',
+              type: 'POST',
+              data: formData,
+              contentType: false,
+              processData: false,
+              cache: false,
+              success: function(){
+                $("#formulario-login")[0].reset();
+                //$("#modal-estudiante").modal("hide");
+                Swal.fire({
+                  position: 'midle-center',
+                  icon: 'success',
+                  title: 'Acción exitosa',
+                  showConfirmButton: false,
+                  timer: 1500
+                }).then(()=>{
+                  window.location.href="kardex.php";
+                });
+              }
+            });
+          }
+        });
+      }
+      /*
+
       function iniciarSesion(){
         const usuario = $("#nusuario").val();
         const clave = $("#clave").val();
 
         if(usuario !="" && clave != ""){
          $.ajax({
-          url : 'controllers/usuario.controller.php',
+          url : '../controllers/usuario.controller.php',
           type : 'POST',
           data : {
             operacion : 'login',
@@ -100,7 +151,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']){
           success : function(result){
             console.log(result);
             if(result["status"]){
-              window.location.href="views/kardex.php";
+              window.location.href="kardex.php";
             }else{
               Swal.fire({
                   icon: 'error',
@@ -112,8 +163,8 @@ if(isset($_SESSION['login']) && $_SESSION['login']){
           }
          }); 
         }
-      }
-      $("#iniciar-sesion").click(iniciarSesion);
+      }*/
+      $("#iniciar-sesion").click(registrarLogin);
     });
   </script>
 </body>
