@@ -89,7 +89,7 @@
 
         Swal.fire({
           icon: 'question',
-          title: 'Matrículas',
+          title: 'Usuarios',
           text: '¿Está seguro de guardar el registro?',
           footer: 'Desarrollado con PHP',
           confirmButtonText: 'Aceptar',
