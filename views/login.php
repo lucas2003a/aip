@@ -94,8 +94,6 @@
         const clave     = $("#claveacceso").val();
 
         if(nombres!="" && apellidos!="" && nusuario!="" && clave!=""){
-
-        }
           Swal.fire({
             icon: 'question',
             title: 'Usuarios',
@@ -140,6 +138,15 @@
               });
             }
           });
+        }else{
+          Swal.fire({
+            position: 'midle-center',
+            icon: 'error',
+            title: 'Llene todo los campos',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
       }
       /*
 
