@@ -1,4 +1,10 @@
+<?php
 
+session_start();
+if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
+    header('Location:../index.php');
+}
+?>
 <style>
   .gradient-custom {
     background:#6a11cb ;
@@ -9,13 +15,7 @@
   }
 </style>
 
-<?php
 
-session_start();
-if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
-    header('Location:../index.php');
-}
-?>
 <!doctype html>
 <html lang="es">
   <head>
