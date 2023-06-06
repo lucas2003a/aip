@@ -1,12 +1,12 @@
 <?php
 
 class Conexion{
-    private $host = '66.152.176.245';    //SERVIDOR
+    private $host = 'localhost';    //SERVIDOR
     private $port = '3306';         //PUERTO DE CONEXION BD
     private $database = 'aip';      // NOMBRE BD
     private $charset = 'UTF8';      //CODIFICACION (IDIOMA)
-    private $user = 'admin';         //USUARIO (IDIOMA)
-    private $password = '160770';         //CONTRASEÑA
+    private $user = 'root';         //USUARIO (IDIOMA)
+    private $password = '';         //CONTRASEÑA
 
     //atributo (instancia PDO) que almmacena el objeto
     private $pdo;
