@@ -15,6 +15,14 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
   }
 </style>
 
+<?php
+
+session_start();
+if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
+  header('Location:../index.php');
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>

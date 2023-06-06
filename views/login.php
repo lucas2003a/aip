@@ -40,7 +40,7 @@
               <div class="mb-md-5 mt-md-4 pb-5">
                 <h2 class="fw-bold mb-2 text-uppercase">registro de usuarios</h2>
                 <p class="text-white-50 mb-5">Porfavor registrate</p>
-                <div class="p-5">
+                <div class="m-5">
                   <form id="formulario-login" autocomplete="off">
                     <div class="mb-4">
                       <label for="nombres" class="form-label">Nombres:</label>
@@ -87,25 +87,25 @@
     $(document).ready(function(){
 
       function registrarLogin(){
-        const nombres = $("#nombres").val();
+        const nombres   = $("#nombres").val();
         const apellidos = $("#apellidos").val();
-        const nusuario = $("#nusuario").val();
-        const claveacceso = $("#claveacceso").val();
+        const nusuario  = $("#nusuario").val();
+        const clave     = $("#claveacceso").val();
 
-        if(nombres !="" && apellidos !="" && nusuario != "" && claveacceso !=""){
+        if(nombres!="" && apellidos!="" && nusuario!="" && clave!=""){
           Swal.fire({
-          icon: 'question',
-          title: 'Usuarios',
-          text: '¿Está seguro de guardar el registro?',
-          footer: 'Desarrollado con PHP',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#3498DB',
-          showCancelButton: true,
-          cancelButtonText: 'Cancelar'
+            icon: 'question',
+            title: 'Usuarios',
+            text: '¿Está seguro de guardar el registro?',
+            footer: 'Desarrollado con PHP',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#3498DB',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar'
           }).then((result) => {
-          //Identificando acción del usuario
+            //Identificando acción del usuario
             if (result.isConfirmed){
-                    //Enviaremos los datos dentro de un OBJETO
+                      //Enviaremos los datos dentro de un OBJETO
             var formData = new FormData();
 
               formData.append("operacion", "registrar");
@@ -141,11 +141,11 @@
           Swal.fire({
             position: 'midle-center',
             icon: 'error',
-            title: 'Falta llenar datos por favor',
+            title: 'Llene todo los campos',
             showConfirmButton: false,
             timer: 1500
           });
-        } 
+        }
       }
       /*
 
