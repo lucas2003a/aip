@@ -44,20 +44,22 @@ if(isset($_SESSION['login']) && $_SESSION['login']){
               <div class="mb-md-5 mt-md-4 pb-5">
                 <h2 class="fw-bold mb-2 text-uppercase">inicio de Sesión</h2>
                 <p class="text-white-50 mb-5">Porfavor registrate</p>
-                <form action="" autocomplete="off">
-                  <div class="mb-4">
-                    <label for="nusuario" class="form-label">Usuario:</label>
-                    <input type="text" id="nusuario" class="form-control form-control-sm"autofocus>
-                  </div>
-                  <div class="mb-4">
-                    <label for="clave" class="form-label">Contraseña:</label>
-                    <input type="password" id="clave" class="form-control form-control-sm">
-                  </div>
-                  <button type="button" id="iniciar-sesion"class="btn btn-lg btn-outline-light px-5" >Iniciar sesion</button>
-                  <div>
-                    <p class="mb-0">¿No tienes una cuenta?<a href="views/login.php" class="text-white-50 fw-bold"> Registrate</a></p>
-                  </div>
-                </form>
+                <div class="m-5">
+                  <form action="" autocomplete="off">
+                    <div class="mb-4">
+                      <label for="nusuario" class="form-label">Usuario:</label>
+                      <input type="text" id="nusuario" class="form-control form-control-sm"autofocus>
+                    </div>
+                    <div class="mb-4">
+                      <label for="clave" class="form-label">Contraseña:</label>
+                      <input type="password" id="clave" class="form-control form-control-sm">
+                    </div>
+                    <button type="button" id="iniciar-sesion"class="btn btn-lg btn-outline-light px-5" >Iniciar sesion</button>
+                    <div>
+                      <p class="mb-0">¿No tienes una cuenta?<a href="views/login.php" class="text-white-50 fw-bold"> Registrate</a></p>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
 
