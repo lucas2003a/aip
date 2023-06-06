@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
+    header('Location:../index.php');
+}
+?>
 <style>
   .gradient-custom {
     background:#6a11cb ;
@@ -8,13 +14,6 @@
   }
 
 </style>
-<?php
-
-session_start();
-if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
-    header('Location:../index.php');
-}
-?>
 
 <!doctype html>
 <html lang="es">
@@ -38,11 +37,11 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
         <section class="vh gradient-custom">
             <div class="container pt-3 h-100">
                 <nav class="nav nav-tabs flex-column">
-                <a class="nav-link text-light" href="articulos.php">Articulos</a>
-                <a class="nav-link text-light" href="grupos.php">Grupos</a>
-                <a class="nav-link text-light" href="kardex.php">Kardex</a>
-            </nav>
-                <div class="card">
+                    <a class="nav-link text-light" href="articulos.php"><h4>Articulos</h4></a>
+                    <a class="nav-link text-light" href="grupos.php"><h4>Grupos</h4></a>
+                    <a class="nav-link text-light" href="kardex.php"><h4>Kardex</h4></a>
+                </nav>
+                <div class="card mt-2">
                     <div class="card-header bg-primary text-light">
                         <div class="row">
                             <div class="col-md-6">
