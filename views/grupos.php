@@ -19,6 +19,7 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
 
     <!--iconos de  bottstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+
     <style>
         .gradient-custom {
             background:#6a11cb ;
@@ -32,14 +33,13 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
   </head>
   <body>
     <section class="vh-100 gradient-custom">
-
         <div class="container py-5 h-100">        
             <nav class="nav nav-tabs flex-column">
-            <a class="nav-link text-light" href="articulos.php">Articulos</a>
+                <a class="nav-link text-light" href="articulos.php">Articulos</a>
                 <a class="nav-link text-light" href="grupos.php">Grupos</a>
                 <a class="nav-link text-light" href="kardex.php">Kardex</a>
-        </nav>
-            <div class="card">
+            </nav>
+            <div class="card mt-2">
                 <div class="card-header bg-primary text-light">
                     <div class="row">
                         <div class="col-md-6">

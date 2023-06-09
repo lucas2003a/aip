@@ -1,5 +1,4 @@
 
-
 <?php
 
 ?>
@@ -88,7 +87,7 @@
     $(document).ready(function(){
 
       function registrarLogin(){
-
+        
         const nombres   = $("#nombres").val();
         const apellidos = $("#apellidos").val();
         const nusuario  = $("#nusuario").val();

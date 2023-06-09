@@ -6,6 +6,7 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
 }
 ?>
 
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,6 +20,7 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   <!--iconos de  bottstrap-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+
   <style>
     .gradient-custom {
       background:#6a11cb ;
@@ -28,7 +30,6 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
       background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
     }
   </style>
-
 
 </head>
 
@@ -46,7 +47,7 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
         <a class="nav-link text-light" href="grupos.php">Grupos</a>
         <a class="nav-link text-light" href="kardex.php">Kardex</a>
       </nav>
-      <div class="card">
+      <div class="card mt-2">
           <div class="card-header bg-primary text-light">
               <div class="row">
                   <div class="col-md-6">

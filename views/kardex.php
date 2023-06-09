@@ -38,10 +38,10 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
         <section class="vh-100 gradient-custom">
             <div class="container py-5 h-100">
                 <nav class="nav nav-tabs flex-column">
-                <a class="nav-link text-light" href="articulos.php">Articulos</a>
-                <a class="nav-link text-light" href="grupos.php">Grupos</a>
-                <a class="nav-link text-light" href="kardex.php">Kardex</a>
-            </nav>
+                    <a class="nav-link text-light" href="articulos.php">Articulos</a>
+                    <a class="nav-link text-light" href="grupos.php">Grupos</a>
+                    <a class="nav-link text-light" href="kardex.php">Kardex</a>
+                </nav>
                 <div class="card mt-2">
                     <div class="card-header bg-primary text-light">
                         <div class="row">
@@ -179,10 +179,10 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
         
         <!-- jQuery-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         
         <!-- SweetAlert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <script>
             $(document).ready(function(){
                 
@@ -324,6 +324,17 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                 }
 
                 $("#guardar-kardex").click(preguntarRegistro);
+                
+                function mostrarKardex(){
+                  $.ajax({
+                    url : '../controllers/kardex.controller.php',
+                    type : 'POST',
+                    data : {operacion : 'listar'},
+                    success : function(result){
+                        $("#tabla-kardex tbody").html(result);
+                    }
+                  }) ; 
+                }
 
                 $("#tabla-kardex tbody").on("click",".editar",function(){
                     const idkardexeditar = $(this).data("idkardex");
