@@ -94,10 +94,10 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
             <div class="modal fade modal" id="modal-registro-kardex" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
-                            <div class="modal-header bg-primary text-light">
-                                    <h5 class="modal-title" id="modalTitleId">Registrar kardex</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                        <div class="modal-header bg-primary text-light">
+                            <h5 class="modal-title" id="modalTitleId">Registrar kardex</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
                         <div class="modal-body">
                             <form id="formulario-kardex" autocomplete="off">
                                 <div class="row">
@@ -114,13 +114,17 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                                         </select>
                                     </div>
                                     <div class="col-md-4">
+                                        <label for="fecha_hora" class="form-label">Fecha y hora</label>
+                                        <input type="datetime-local" name="fecha_hora" id="fecha_hora" class="form-control form-control-sm">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
                                         <label for="articulo" class="form-label">Artículo</label>
                                         <select name="articulo" id="articulo" class="form-select form-select-sm">
                                             <option value="">Seleccione</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="row mt-3">
                                     <div class="col-md-4">
                                         <label for="ingreso" class="form-label">Ingreso</label>
                                         <input type="number" name="ingreso" id="ingreso" class="form-control form-control-sm">
@@ -129,29 +133,26 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                                         <label for="salida" class="form-label">Salida</label>
                                         <input type="number" name="salida" id="salida" class="form-control form-control-sm">
                                     </div>
-                                    <div class="col-md-4">
+
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
                                         <label for="saldo" class="form-label">Saldo</label>
                                         <input type="number" name="saldo" id="saldo" class="form-control form-control-sm">
                                     </div>
-                                </div>
-                                <div class="row mt-3">
                                     <div class="col-md-6">
                                         <label for="concepto" class="form-label">Concepto</label>
                                         <input type="text" name="concepto" id="concepto" class="form-control form-control-sm" maxlength="40">
                                     </div>
+                                </div>
+                                <div class="row mt-3">
                                     <div class="col-md-6">
                                         <label for="detalle" class="form-label">Detalle</label>
                                         <input type="text" name="detalle" id="detalle" class="form-control form-control-sm" maxlength="40">
                                     </div>
-                                </div>
-                                <div class="row mt-3">
                                     <div class="col-md-6">
                                         <label for="encargado" class="form-label">Encargado</label>
                                         <input type="text" name="encargado" id="encargado" class="form-control form-control-sm" maxlength="40">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="fecha_hora" class="form-label">Fecha y hora</label>
-                                        <input type="datetime-local" name="fecha_hora" id="fecha_hora" class="form-control form-control-sm">
                                     </div>
                                 </div>
                             </form>
@@ -262,9 +263,9 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
 
                     formData.append("idarticulo",$("#codigoa").val());
                     formData.append("fecha_hora",$("#fecha_hora").val());
-                    formData.append("ingreso",$("#ingreso").val());
-                    formData.append("salida",$("#salida").val());
-                    formData.append("saldo",$("#saldo").val());
+                    formData.append("ingreso",+$("#ingreso").val());
+                    formData.append("salida",+$("#salida").val());
+                    formData.append("saldo",+$("#saldo").val());
                     formData.append("concepto",$("#concepto").val());
                     formData.append("detalle",$("#detalle").val());
                     formData.append("encargado",$("#encargado").val());
@@ -296,8 +297,8 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                 function preguntarRegistro(){
                     Swal.fire({
                         icon: 'question',
-                        title: 'Matrículas',
-                        text: '¿Está seguro de registrar al estudiante?',
+                        title: 'Kardex',
+                        text: '¿Está seguro de registrar los datos?',
                         footer: 'Desarrollado con PHP',
                         confirmButtonText: 'Aceptar',
                         confirmButtonColor: '#3498DB',
