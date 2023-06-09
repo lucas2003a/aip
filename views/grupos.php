@@ -5,23 +5,7 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
     header('Location:../index.php');
 }
 ?>
-<style>
-  .gradient-custom {
-    background:#6a11cb ;
-    
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
 
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-  }
-</style>
-
-<?php
-
-session_start();
-if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
-    header('Location:../index.php');
-}
-?>
 <!doctype html>
 <html lang="es">
   <head>
