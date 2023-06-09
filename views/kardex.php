@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
     header('Location:../index.php');
@@ -34,12 +35,12 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
     </head>
 
     <body>
-        <section class="vh gradient-custom">
+        <section class="vh-100 gradient-custom">
             <div class="container py-5 h-100">
                 <nav class="nav nav-tabs flex-column">
-                    <a class="nav-link text-light" href="articulos.php"><h4>Articulos</h4></a>
-                    <a class="nav-link text-light" href="grupos.php"><h4>Grupos</h4></a>
-                    <a class="nav-link text-light" href="kardex.php"><h4>Kardex</h4></a>
+                    <a class="nav-link text-light" href="articulos.php">Articulos</a>
+                    <a class="nav-link text-light" href="grupos.php">Grupos</a>
+                    <a class="nav-link text-light" href="kardex.php">Kardex</a>
                 </nav>
                 <div class="card mt-2">
                     <div class="card-header bg-primary text-light">
@@ -48,7 +49,7 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                                 <h1><strong>Kardex</strong></h1>
                             </div>
                             <div class="col-md-6 text-end">
-                                <a href="../controllers/usuario.controller.php?operacion=finalizar" style="text-decoration: none;" class="btn btn-danger btn-sm"><i class="bi bi-box-arrow-left">Cerrar sesión</i></a>
+                                <a href="../controllers/usuario.controller.php?operacion=finalizar" style="text-decoration: none;" class="btn btn-danger btn-sm"><i class="bi bi-box-arrow-left"></i> Cerrar sesión</a>
                                 <button class="btn btn-success btn-sm" id="abrir-modal" data-bs-toggle="modal" data-bs-target="#modal-registro-kardex"><i class="bi bi-plus-circle-fill"></i> Agregar otro registro</button>
                             </div>
                         </div>
@@ -179,6 +180,9 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
         <!-- jQuery-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <script>
             $(document).ready(function(){
                 
@@ -240,24 +244,23 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                         }
                     });
                 });
-                
-                function mostrarKardex(){
-                  $.ajax({
-                    url : '../controllers/kardex.controller.php',
-                    type : 'POST',
-                    data : {operacion : 'listar'},
-                    success : function(result){
-                        $("#tabla-kardex tbody").html(result);
-                    }
-                  }) ; 
-                }
 
                 function registrarKardex(){
 
                     var formData = new FormData();
 
-                    formData.append("operacion","registrar");
-                    formData.append("codigoa",$("#codigoa").val());
+                    if(datosNuevos){
+
+                        formData.append("operacion","registrar");
+                    
+                    }else{
+
+                        formData.append("operacion","actualizar");
+                        formData.append("idkardex",idkardexactualizar);
+                    
+                    }
+
+                    formData.append("idarticulo",$("#codigoa").val());
                     formData.append("fecha_hora",$("#fecha_hora").val());
                     formData.append("ingreso",$("#ingreso").val());
                     formData.append("salida",$("#salida").val());
@@ -273,65 +276,65 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                         contentType : false,
                         processData : false,
                         cache : false,
-                        succes : function(){
-                            $("#formulario-kardex")[0],reset();
+                        success : function(){
+                            $("#formulario-kardex")[0].reset();
+
+                            mostrarKardex();
+
+                            $("#modal-registro-kardex").modal("hide");
                             Swal.fire({
                                 position: 'midle-center',
                                 icon: 'success',
                                 title: 'Acción exitosa',
                                 showConfirmButton: false,
                                 timer: 1500
-                            }).then(()=>{
-                                window.location.href="kardex.php";
                             });
                         }
                     });
                 }
-                /* 
-                function registrarKardex(){
-                    if(confirm("¿desea guardar el registo?")){
-                        let datos = {
-                            operacion   :   'registrar',
-                            idkardex    :   idkardexactualizar,
-                            idarticulo  :   $("#codigoa").val(),
-                            fecha_hora  :   $("#fecha_hora").val(),
-                            ingreso     :   $("#ingreso").val(),
-                            salida      :   $("#salida").val(),
-                            saldo       :   $("#saldo").val(),
-                            concepto    :   $("#concepto").val(),
-                            detalle     :   $("#detalle").val(),
-                            encargado   :   $("#encargado").val()          
-                        };
 
-                        if(!datosNuevos){
-                            datos["operacion"] = "actualizar";
+                function preguntarRegistro(){
+                    Swal.fire({
+                        icon: 'question',
+                        title: 'Matrículas',
+                        text: '¿Está seguro de registrar al estudiante?',
+                        footer: 'Desarrollado con PHP',
+                        confirmButtonText: 'Aceptar',
+                        confirmButtonColor: '#3498DB',
+                        showCancelButton: true,
+                        cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                        //Identificando acción del usuario
+                        if (result.isConfirmed){
+                            registrarKardex();
                         }
-
-                        $.ajax({
-                            url : '../controllers/kardex.controller.php',
-                            type : 'POST',
-                            data : datos,
-                            success : function(result){
-                                if(result == ""){
-                                    $("#formulario-kardex")[0].reset();
-
-                                    mostrarKardex();
-
-                                    /*"#modal-registro-kardex", es el id del modal que se establece en la linea 78 en el segundo atributo:
-                                    <div class="modal fade" id="modal-registro-kardex" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">     
-                                    $("#modal-registro-kardex").modal("hide");
-                                }
-                            }
-                        });
-                    }
-                }*/
-                function abrirModal(){
-                    datosNuevos = true;
-                    $("#modalTitleId").html("Registrar Kardex");
-                    $("#formulario-kardex")[0].reset();
+                    });
                 }
-                $("#guardar-kardex").click(registrarKardex);
-                $("#abrir-modal").click(abrirModal);
+
+                function mostrarKardex(){
+                    $.ajax({
+                        url : '../controllers/kardex.controller.php',
+                        type : 'POST',
+                        data : {operacion : 'listar'},
+                        dataType : 'text', 
+                        success : function(result){
+                            $("#tabla-kardex tbody").html(result);
+                        }
+                    }); 
+                }
+
+                $("#guardar-kardex").click(preguntarRegistro);
+                
+                function mostrarKardex(){
+                  $.ajax({
+                    url : '../controllers/kardex.controller.php',
+                    type : 'POST',
+                    data : {operacion : 'listar'},
+                    success : function(result){
+                        $("#tabla-kardex tbody").html(result);
+                    }
+                  }) ; 
+                }
 
                 $("#tabla-kardex tbody").on("click",".editar",function(){
                     const idkardexeditar = $(this).data("idkardex");

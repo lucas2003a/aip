@@ -15,6 +15,13 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
   }
 </style>
 
+<?php
+
+session_start();
+if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
+    header('Location:../index.php');
+}
+?>
 <!doctype html>
 <html lang="es">
   <head>
@@ -29,16 +36,25 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
     <!--iconos de  bottstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 
+    <style>
+        .gradient-custom {
+            background:#6a11cb ;
+            
+            background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+            background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+        }
+    </style>
+
   </head>
   <body>
-    <section class="vh gradient-custom">
-
-        <div class="container pt-3 h-100">        
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">        
             <nav class="nav nav-tabs flex-column">
-            <a class="nav-link text-light" href="articulos.php"><h4>Articulos</h4></a>
-                <a class="nav-link text-light" href="grupos.php"><h4>Grupos</h4></a>
-                <a class="nav-link text-light" href="kardex.php"><h4>Kardex</h4></a>
-        </nav>
+                <a class="nav-link text-light" href="articulos.php">Articulos</a>
+                <a class="nav-link text-light" href="grupos.php">Grupos</a>
+                <a class="nav-link text-light" href="kardex.php">Kardex</a>
+            </nav>
             <div class="card mt-2">
                 <div class="card-header bg-primary text-light">
                     <div class="row">
@@ -46,7 +62,7 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                             <h1><strong>Lista de grupos</strong></h1>
                         </div>
                         <div class="col-md-6 text-end">
-                            <a href="../controllers/usuario.controller.php?operacion=finalizar" style="text-decoration: none;" class="btn btn-danger btn-sm"><i class="bi bi-box-arrow-left">Cerrar sesión</i></a>
+                            <a href="../controllers/usuario.controller.php?operacion=finalizar" style="text-decoration: none;" class="btn btn-danger btn-sm"><i class="bi bi-box-arrow-left"></i> Cerrar sesión</a>
                             <button class="btn btn-success btn-sm" id="abrir-modal" data-bs-toggle="modal" data-bs-target="#modal-registro-grupos"><i class="bi bi-plus-circle-fill"></i> Agregar grupo</button>
                         </div>
                     </div>

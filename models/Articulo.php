@@ -26,7 +26,7 @@ class Articulo extends Conexion{
 
     public function listadoArticulos($idgrupo = 0){
         try{
-            $consulta = $this->accesoBD->prepare("call spu_obtener_Articulo(?)");
+            $consulta = $this->accesoBD->prepare("call spu_obtener_articulo(?)");
             $consulta->execute(array($idgrupo));
             
             return $consulta->fetchAll(PDO::FETCH_ASSOC);

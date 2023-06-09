@@ -1,14 +1,3 @@
-<style>
-  .gradient-custom {
-    background:#6a11cb ;
-    
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-  }
-
-
-</style>
 
 <?php
 
@@ -27,11 +16,22 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
+  <style>
+    .gradient-custom {
+      background:#6a11cb ;
+      
+      background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+      background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    }
+
+
+  </style>
 </head>
 
 <body>
-  <section class="vh gradient-custom">
-    <div class="container py-5 h-auto">
+  <section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-md-6 ">
           <!--INICIO DE CARD-->
@@ -87,6 +87,7 @@
     $(document).ready(function(){
 
       function registrarLogin(){
+        
         const nombres   = $("#nombres").val();
         const apellidos = $("#apellidos").val();
         const nusuario  = $("#nusuario").val();
