@@ -4,22 +4,12 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
     header('Location:../index.php');
 }
 ?>
-<style>
-  .gradient-custom {
-    background:#6a11cb ;
-    
-    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-  }
-
-</style>
 
 <!doctype html>
 <html lang="es">
 
     <head>
-        <title>Title</title>
+        <title>AIP</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,11 +21,21 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
         <!--iconos de  bottstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 
+        <style>
+            .gradient-custom {
+                background:#6a11cb ;
+                
+                background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+                background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+            }
+
+        </style>
     </head>
 
     <body>
         <section class="vh gradient-custom">
-            <div class="container pt-3 h-100">
+            <div class="container py-5 h-100">
                 <nav class="nav nav-tabs flex-column">
                     <a class="nav-link text-light" href="articulos.php"><h4>Articulos</h4></a>
                     <a class="nav-link text-light" href="grupos.php"><h4>Grupos</h4></a>
@@ -71,7 +71,7 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                                 <tr>
                                     <th>#</th>
                                     <th>Cod.articulo</th>
-                                    <th>Fecha y hora</th>
+                                    <th>Fecha</th>
                                     <th>Ingreso</th>
                                     <th>Salida</th>
                                     <th>Saldo</th>
@@ -149,8 +149,8 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                                         <input type="text" name="encargado" id="encargado" class="form-control form-control-sm" maxlength="40">
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="fecha_hora" class="form-label">Fecha</label>
-                                        <input type="date" name="fecha_hora" id="fecha_hora" class="form-control form-control-sm">
+                                        <label for="fecha_hora" class="form-label">Fecha y hora</label>
+                                        <input type="datetime-local" name="fecha_hora" id="fecha_hora" class="form-control form-control-sm">
                                     </div>
                                 </div>
                             </form>
@@ -253,6 +253,42 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                 }
 
                 function registrarKardex(){
+
+                    var formData = new FormData();
+
+                    formData.append("operacion","registrar");
+                    formData.append("codigoa",$("#codigoa").val());
+                    formData.append("fecha_hora",$("#fecha_hora").val());
+                    formData.append("ingreso",$("#ingreso").val());
+                    formData.append("salida",$("#salida").val());
+                    formData.append("saldo",$("#saldo").val());
+                    formData.append("concepto",$("#concepto").val());
+                    formData.append("detalle",$("#detalle").val());
+                    formData.append("encargado",$("#encargado").val());
+
+                    $.ajax({
+                        url : '../controllers/kardex.controller.php',
+                        type : 'POST',
+                        data : formData,
+                        contentType : false,
+                        processData : false,
+                        cache : false,
+                        succes : function(){
+                            $("#formulario-kardex")[0],reset();
+                            Swal.fire({
+                                position: 'midle-center',
+                                icon: 'success',
+                                title: 'Acción exitosa',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(()=>{
+                                window.location.href="kardex.php";
+                            });
+                        }
+                    });
+                }
+                /* 
+                function registrarKardex(){
                     if(confirm("¿desea guardar el registo?")){
                         let datos = {
                             operacion   :   'registrar',
@@ -282,13 +318,13 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                                     mostrarKardex();
 
                                     /*"#modal-registro-kardex", es el id del modal que se establece en la linea 78 en el segundo atributo:
-                                    <div class="modal fade" id="modal-registro-kardex" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">*/     
-                                    $("#modal-registro-kardex").modal('hide');
+                                    <div class="modal fade" id="modal-registro-kardex" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">     
+                                    $("#modal-registro-kardex").modal("hide");
                                 }
                             }
-                        })
+                        });
                     }
-                }
+                }*/
                 function abrirModal(){
                     datosNuevos = true;
                     $("#modalTitleId").html("Registrar Kardex");

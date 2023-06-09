@@ -15,18 +15,11 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
   }
 </style>
 
-<?php
-
-session_start();
-if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
-  header('Location:../index.php');
-}
-?>
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
-  <title>Articulos</title>
+  <title>AIP</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

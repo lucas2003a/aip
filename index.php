@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+if(isset($_SESSION['login']) && $_SESSION['login']){
+  header('Location:views/kardex.php');
+}
+?>
 <style>
   .gradient-custom {
     background:#6a11cb ;
@@ -9,14 +16,6 @@
 
 
 </style>
-
-<?php
-
-session_start();
-if(isset($_SESSION['login']) && $_SESSION['login']){
-  header('Location:views/kardex.php');
-}
-?>
 
 <!doctype html>
 <html lang="es">
@@ -113,6 +112,14 @@ if(isset($_SESSION['login']) && $_SESSION['login']){
             }
           }
          }); 
+        }else{
+          Swal.fire({
+            position: 'midle-center',
+            icon: 'error',
+            title: 'Llene todo los campos',
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
       }
       $("#iniciar-sesion").click(iniciarSesion);

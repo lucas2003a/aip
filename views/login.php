@@ -18,7 +18,7 @@
 <html lang="es">
 
 <head>
-  <title>Bienvenido</title>
+  <title>Registrarse</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -58,7 +58,7 @@
                       <label for="claveacceso" class="form-label">Contraseña:</label>
                       <input type="password" id="claveacceso" class="form-control form-control-sm">
                     </div>
-                    <button type="button" id="iniciar-sesion"class="btn btn-lg btn-outline-light px-5" >Iniciar sesion</button>
+                    <button type="button" id="iniciar-sesion"class="btn btn-lg btn-outline-light fw-bold" >Iniciar sesion</button>
                   </form>
                 </div>
               </div>
