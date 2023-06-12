@@ -35,7 +35,7 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
     </head>
 
     <body>
-        <section class="vh-100 gradient-custom">
+        <section class="vh-auto gradient-custom">
             <div class="container py-5 h-100">
                 <nav class="nav nav-tabs flex-column">
                     <a class="nav-link text-light" href="articulos.php">Articulos</a>
@@ -55,36 +55,38 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                         </div>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped table-sm" id="tabla-kardex">
-                            <colgroup>
-                                <col width = "5%">
-                                <col width = "10%">
-                                <col width = "15%">
-                                <col width = "5%">
-                                <col width = "5%">
-                                <col width = "5%">
-                                <col width = "15%">
-                                <col width = "15%">
-                                <col width = "20%">
-                                <col width = "5%">
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Cod.articulo</th>
-                                    <th>Fecha</th>
-                                    <th>Ingreso</th>
-                                    <th>Salida</th>
-                                    <th>Saldo</th>
-                                    <th>Concepto</th>
-                                    <th>Detalle</th>
-                                    <th>Encargado</th>
-                                    <th>Operaciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>               
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm" id="tabla-kardex">
+                                <colgroup>
+                                    <col width = "5%">
+                                    <col width = "10%">
+                                    <col width = "15%">
+                                    <col width = "5%">
+                                    <col width = "5%">
+                                    <col width = "5%">
+                                    <col width = "15%">
+                                    <col width = "15%">
+                                    <col width = "20%">
+                                    <col width = "5%">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Cod.articulo</th>
+                                        <th>Fecha</th>
+                                        <th>Ingreso</th>
+                                        <th>Salida</th>
+                                        <th>Saldo</th>
+                                        <th>Concepto</th>
+                                        <th>Detalle</th>
+                                        <th>Encargado</th>
+                                        <th>Operaciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>               
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -158,8 +160,8 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="guardar-kardex">Save</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" id="guardar-kardex">Guardar</button>
                         </div>
                     </div>
                 </div>
@@ -250,6 +252,20 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
 
                     var formData = new FormData();
 
+                    /*var campos = $('input[type="datetime-local"], input[type="number"], input[type="text"]');
+
+                        for(var i = 0; i < campos.length;i ++){
+                            if(campos.eq(i).val() === ""){
+                                Swal.fire({
+                                    position: 'midle-center',
+                                    icon: 'error',
+                                    title: 'Llene los campos',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        }
+                        */
                     if(datosNuevos){
 
                         formData.append("operacion","registrar");
@@ -265,11 +281,10 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                     formData.append("fecha_hora",$("#fecha_hora").val());
                     formData.append("ingreso",+$("#ingreso").val());
                     formData.append("salida",+$("#salida").val());
-                    formData.append("saldo",+$("#saldo").val());
                     formData.append("concepto",$("#concepto").val());
                     formData.append("detalle",$("#detalle").val());
                     formData.append("encargado",$("#encargado").val());
-
+                        
                     $.ajax({
                         url : '../controllers/kardex.controller.php',
                         type : 'POST',
@@ -358,7 +373,6 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                             $("#fecha_hora").val(result["fecha_hora"]);
                             $("#ingreso").val(result["ingreso"]);
                             $("#salida").val(result["salida"]);
-                            $("#saldo").val(result["saldo"]);
                             $("#concepto").val(result["concepto"]);
                             $("#detalle").val(result["detalle"]);
                             $("#encargado").val(result["encargado"]);

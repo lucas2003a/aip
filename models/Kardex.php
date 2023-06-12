@@ -26,14 +26,13 @@ class Kardex extends Conexion{
 
     public function registrarKardex($datos = []){
         try{
-            $consulta = $this->accesoBD->prepare("call spu_insertar_kardex(?,?,?,?,?,?,?,?)");
+            $consulta = $this->accesoBD->prepare("call spu_insertar_kardex(?,?,?,?,?,?,?)");
             $consulta->execute(
                 array(
                     $datos["idarticulo"],
                     $datos["fecha_hora"],
                     $datos["ingreso"],
                     $datos["salida"],
-                    $datos["saldo"],
                     $datos["concepto"],
                     $datos["detalle"],
                     $datos["encargado"]
@@ -48,7 +47,7 @@ class Kardex extends Conexion{
 
     public function actualizarKardex($datos = []){
         try{
-            $consulta = $this->accesoBD->prepare("call spu_modificar_kardex(?,?,?,?,?,?,?,?,?)");
+            $consulta = $this->accesoBD->prepare("call spu_modificar_kardex(?,?,?,?,?,?,?,?)");
             $consulta->execute(
                 array(
                     $datos["idkardex"],
@@ -56,7 +55,6 @@ class Kardex extends Conexion{
                     $datos["fecha_hora"],
                     $datos["ingreso"],
                     $datos["salida"],
-                    $datos["saldo"],
                     $datos["concepto"],
                     $datos["detalle"],
                     $datos["encargado"]

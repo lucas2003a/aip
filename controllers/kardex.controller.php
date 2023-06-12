@@ -62,9 +62,9 @@ if(isset($_POST['operacion'])){
         $datosForm = [
             "idarticulo"    =>  $_POST['idarticulo'],
             "fecha_hora"    =>  $_POST['fecha_hora'],
-            "ingreso"       =>  intval($_POST['ingreso']),
-            "salida"        =>  intval($_POST['salida']),
-            "saldo"         =>  intval($_POST['saldo']),
+            "ingreso"       =>  $_POST['ingreso'],
+            "salida"        =>  $_POST['salida'],
+            "saldo"         =>  $_POST['saldo'],
             "concepto"      =>  $_POST['concepto'],
             "detalle"       =>  $_POST['detalle'],
             "encargado"     =>  $_POST['encargado']
@@ -79,9 +79,9 @@ if(isset($_POST['operacion'])){
             "idkardex"      =>  $_POST['idkardex'],
             "idarticulo"    =>  $_POST['idarticulo'],
             "fecha_hora"    =>  $_POST['fecha_hora'],
-            "ingreso"       =>  intval($_POST['ingreso']),
-            "salida"        =>  intval($_POST['salida']),
-            "saldo"         =>  intval($_POST['saldo']),
+            "ingreso"       =>  $_POST['ingreso'],
+            "salida"        =>  $_POST['salida'],
+            "saldo"         =>  $_POST['saldo'],
             "concepto"      =>  $_POST['concepto'],
             "detalle"       =>  $_POST['detalle'],
             "encargado"     =>  $_POST['encargado']
