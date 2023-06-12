@@ -35,7 +35,7 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
     </head>
 
     <body>
-        <section class="vh-auto gradient-custom">
+        <section class="vh-100 gradient-custom">
             <div class="container py-5 h-100">
                 <nav class="nav nav-tabs flex-column">
                     <a class="nav-link text-light" href="articulos.php">Articulos</a>
@@ -115,23 +115,23 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                                             <option value="">Seleccione</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-sm-6 col-md-4">
                                         <label for="fecha_hora" class="form-label">Fecha y hora</label>
                                         <input type="datetime-local" name="fecha_hora" id="fecha_hora" class="form-control form-control-sm">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-md-4">
+                                    <div class="col-sm-6 col-md-4">
                                         <label for="articulo" class="form-label">Artículo</label>
                                         <select name="articulo" id="articulo" class="form-select form-select-sm">
                                             <option value="">Seleccione</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-sm-6 col-md-4">
                                         <label for="ingreso" class="form-label">Ingreso</label>
                                         <input type="number" name="ingreso" id="ingreso" class="form-control form-control-sm">
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-sm-6 col-md-4">
                                         <label for="salida" class="form-label">Salida</label>
                                         <input type="number" name="salida" id="salida" class="form-control form-control-sm">
                                     </div>
@@ -139,8 +139,8 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-6">
-                                        <label for="saldo" class="form-label">Saldo</label>
-                                        <input type="number" name="saldo" id="saldo" class="form-control form-control-sm">
+                                        <label for="detalle" class="form-label">Detalle</label>
+                                        <input type="text" name="detalle" id="detalle" class="form-control form-control-sm" maxlength="40">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="concepto" class="form-label">Concepto</label>
@@ -148,11 +148,7 @@ if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
                                     </div>
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-md-6">
-                                        <label for="detalle" class="form-label">Detalle</label>
-                                        <input type="text" name="detalle" id="detalle" class="form-control form-control-sm" maxlength="40">
-                                    </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <label for="encargado" class="form-label">Encargado</label>
                                         <input type="text" name="encargado" id="encargado" class="form-control form-control-sm" maxlength="40">
                                     </div>
